@@ -1,124 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Penggajian</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{{url('d/css/bootstrap.css')}}" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    <!-- Add custom CSS here -->
+    <link href="{{url('d/css/sb-admin.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url('d/font-awesome/css/font-awesome.min.css')}}">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="{{url('http://cdn.oesmith.co.uk/morris-0.4.3.min.css')}}">
 
     <style type="text/css">
         body{
-            background-color: #f2f2f2;
+            background-color: lightblue;
         }
     </style>
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+  </head>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+  <body>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand glyphicon" href="{{ url('/') }}">
-                        <b>{{ config('app.name', 'Laravel') }}</b>
-                    </a>
-                </div>
+    <div id="wrapper">
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <b><a class="navbar-brand" href="{{url('home')}}"><span class="fa fa-dashboard"></span> Penggajian</a></b>
+        </div>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Pegawai <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('jabatan') }}">Jabatan</a></li>
-                                <li><a href="{{ url('golongan') }}">Golongan</a></li>
-                                <li><a href="{{ url('pegawai') }}">Pegawai</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Lembur <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('lembur-kategori') }}">Kategori Lembur</a></li>
-                                <li><a href="{{ url('lembur-pegawai') }}">Lembur Pegawai</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Tunjangan <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('tunjangan') }}">Tunjangan</a></li>
-                                <li><a href="{{ url('tunjangan-pegawai') }}">Tunjangan Pegawai</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="{{ url('penggajian') }}">Penggajian</a></li>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            @if (Auth::guest())
+            <li><a href="{{ url('/login') }}"> Login</a></li>
+            <li><a href="{{ url('/register') }}"> Register</a></li>
+            @else
+            <li><a href="{{ url('jabatan') }}"><span class="fa fa-briefcase"></span> Jabatan</a></li>
+            <li><a href="{{ url('golongan') }}"><span class="fa fa-refresh"></span> Golongan</a></li>
+            <li><a href="{{ url('pegawai') }}"><span class="fa fa-users"></span> Pegawai</a></li>
+            <li><a href="{{ url('lembur-kategori') }}"><span class="fa fa-clock-o"></span> Kategori Lembur</a></li>
+            <li><a href="{{ url('lembur-pegawai') }}"><span class="fa fa-clock-o"></span><span class="fa fa-users"></span> Lembur Pegawai</a></li>
+            <li><a href="{{ url('tunjangan') }}"><span class="fa fa-usd"></span> Tunjangan</a></li>
+            <li><a href="{{ url('tunjangan-pegawai') }}"><span class="fa fa-usd"></span><span class="fa fa-users"></span> Tunjangan Pegawai</a></li>
+            <li><a href="{{ url('penggajian') }}"><span class="fa fa-money"></span> Penggajian</a></li>
+          </ul>
 
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+          <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <span class="fa fa-user"></span>
+                     {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            <span class="glyphicon glyphicon-log-out"></span>Logout
-                                        </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="{{ url('/logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            <span class="fa fa-sign-out"></span>Logout
+                        </a>
 
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </li>
+            @endif
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+      
+    <div id="page-wrapper">
+        <div class="col-lg-4">
+            @yield('content')
+        </div>
     </div>
 
-        @yield('content')
+    </div><!-- /.row -->
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
-</body>
+    </div><!-- /#page-wrapper -->
+
+    </div><!-- /#wrapper -->
+
+    <!-- JavaScript -->
+    <script src="{{url('d/js/jquery-1.10.2.js')}}"></script>
+    <script src="{{url('d/js/bootstrap.js')}}"></script>
+
+    <!-- Page Specific Plugins -->
+    <script src="{{url('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js')}}"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    <script src="{{url('d/js/morris/chart-data-morris.js')}}"></script>
+    <script src="{{url('d/js/tablesorter/jquery.tablesorter.js')}}"></script>
+    <script src="{{url('d/js/tablesorter/tables.js')}}"></script>
+
+  </body>
 </html>

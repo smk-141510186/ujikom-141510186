@@ -6,6 +6,8 @@ use /*Illuminate\Http\*/Request;
 use App\KategoriLembur;
 use App\Jabatan;
 use App\Golongan;
+use Validator;
+use Input;
 
 class KategoriLemburController extends Controller
 {
@@ -48,8 +50,30 @@ class KategoriLemburController extends Controller
     public function store(Request $request)
     {
         //
-        $kategoril=Request::all();
-        KategoriLembur::create($kategoril);
+        $rules=[
+            'kode_lembur'=>'required|unique:kategori_lemburs',
+            'jabatan_id'=>'required',
+            'golongan_id'=>'required',
+            'besaran_uang'=>'required',
+        ];
+        $messages=[
+            'kode_lembur.required'=>'Kode Lembur Tidak Boleh Kosong',
+            'kode_lembur.unique'=>'Kode Lembur Tidak Boleh Sama',
+            'jabatan_id.required'=>'Jabatan Tidak Boleh Kosong',
+            'golongan_id.required'=>'Golongan Tidak Boleh Kosong',
+            'besaran_uang.required'=>'Besaran Uang Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $user=new KategoriLembur;
+        $user->kode_lembur=Request('kode_lembur');
+        $user->jabatan_id=Request('jabatan_id');
+        $user->golongan_id=Request('golongan_id');
+        $user->besaran_uang=Request('besaran_uang');
+        $user->save();
+
         return redirect('lembur-kategori');
     }
 

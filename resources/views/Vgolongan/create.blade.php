@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
 	<center><h2><label>Tambah Data Golongan</label></h2></center><hr>
 	<form method="POST" action="{{route('golongan.store')}}">
 		{{csrf_field()}}
 		
 		<div class="form-group{{ $errors->has('kode_golongan') ? ' has-error' : '' }}">
 			<label class="col-md-4 control-label">Kode Golongan</label>
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-8">
 				<input class="form-control" type="text" name="kode_golongan">
 				@if ($errors->has('kode_golongan'))
 					<span class="help-block">
@@ -20,7 +19,7 @@
 
 		<div class="form-group{{ $errors->has('kode_golongan') ? ' has-error' : '' }}">
 			<label class="col-md-4 control-label">Nama Golongan</label>
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-8">
 				<input class="form-control" type="text" name="nama_golongan">
 				@if ($errors->has('nama_golongan'))
 					<span class="help-block">
@@ -32,7 +31,7 @@
 
 		<div class="form-group{{ $errors->has('kode_golongan') ? ' has-error' : '' }}">
 			<label class="col-md-4 control-label">Besaran Uang</label>
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-8">
 				<input class="form-control" type="text" name="besaran_uang">
 				@if ($errors->has('besaran_uang'))
 					<span class="help-block">
@@ -43,10 +42,9 @@
 		</div>
 
 		<div class="form-group">
-			<div class="col-md-6 col-md-offset-4">
+			<div class="col-md-8 col-md-offset-4">
 				<input class="btn btn-success" type="submit" value="Simpan">
 			</div>
 		</div>
 	</form>
-</div>
 @endsection
