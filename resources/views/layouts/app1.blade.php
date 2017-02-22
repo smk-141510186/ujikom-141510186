@@ -19,16 +19,10 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-
-    <style type="text/css">
-        body{
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -114,9 +108,9 @@
                 </div>
             </div>
         </nav>
-    </div>
 
         @yield('content')
+    </div>
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>

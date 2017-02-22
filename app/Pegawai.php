@@ -26,8 +26,8 @@ class Pegawai extends Model
     {
         return $this->hasMany('App\LemburPegawai','pegawai_id');
     }
-    public function TUnjanganPegawai()
+    public function TunjanganPegawai()
     {
-        return $this->hasMany('App\TUnjanganPegawai','pegawai_id');
+        return $this->hasMany('App\TunjanganPegawai','pegawai_id');
     }
 }

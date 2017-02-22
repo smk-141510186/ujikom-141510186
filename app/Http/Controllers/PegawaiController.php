@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Input;
+use App\Http\Requests;
+use App\Http\Requests\StoreRequest;
 
 class PegawaiController extends Controller
 {
@@ -53,7 +55,7 @@ class PegawaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         //
         $file=Input::file('photo');
@@ -76,7 +78,7 @@ class PegawaiController extends Controller
             $pegawai->photo=$filename;
             $pegawai->save();
         }
-        return redirect('pegawai');
+        return redirect()->route('pegawai.index')->with('alert-success','Data Berhasil Disimpan');
     }
 
     /**
@@ -115,28 +117,20 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*
         $file=Input::file('photo');
         $destination=public_path().'/gambar ';
         $filename=$file->getClientOriginalName();
         $uploadsuccess=$file->move($destination,$filename);
 
         if(Input::hasFile('photo')){
-            $user=User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email'),
-            'permission' => $request->get('permission'),
-            'password' => bcrypt($request->get('password')),
-        ]);
             $pegawai=Pegawai::find($id);
             $pegawai->nip=$request->get('nip');
-            $pegawai->user_id=$user->id;
             $pegawai->jabatan_id=$request->get('jabatan_id');
             $pegawai->golongan_id=$request->get('golongan_id');
             $pegawai->photo=$filename;
             $pegawai->update();
         }
-        return redirect('pegawai');*/
+        return redirect('pegawai');
     }
 
     /**

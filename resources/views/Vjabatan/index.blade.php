@@ -10,7 +10,11 @@
 	<div class="panel panel-info">
 		<div class="panel-heading"><b>Jabatan</b></div>
 		<div class="panel-body">
-		<a class="btn btn-success" href="{{url('jabatan/create')}}"><b>+ Tambah</b></a>
+		<a class="btn btn-success" href="{{url('jabatan/create')}}">
+			<b>
+				<span class="glyphicon glyphicon-plus-sign"></span>Tambah
+			</b>
+		</a>
 		<br><br>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
@@ -34,13 +38,16 @@
 						<td> {{$data->nama_jabatan}} </td>
 						<td> Rp.{{$data->besaran_uang}} </td>
 						<td>
-							<a class="btn btn-info btn-sm" href="{{route('jabatan.edit', $data->id)}}">Ubah</a>
+							<a class="btn btn-info btn-sm" href="{{route('jabatan.edit', $data->id)}}">
+							<span class="glyphicon glyphicon-edit"></span>Ubah</a>
 						</td>
 						<td>
 							<form method="POST" action="{{route('jabatan.destroy', $data->id)}}">
 								{{csrf_field()}}
 								<input type="hidden" name="_method" value="DELETE">
-								<input class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin ingin menghapus data ?');" type="submit" value="Hapus">
+								<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin ingin menghapus data ?');">
+									<span class="glyphicon glyphicon-trash"></span>Hapus
+								</button>
 							</form>
 						</td>
 					</tr>
