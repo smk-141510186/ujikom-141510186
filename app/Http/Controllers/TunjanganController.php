@@ -6,6 +6,8 @@ use /*Illuminate\Http\*/Request;
 use App\Tunjangan;
 use App\Jabatan;
 use App\Golongan;
+use Validator;
+use Input;
 
 class TunjanganController extends Controller
 {
@@ -48,8 +50,36 @@ class TunjanganController extends Controller
     public function store(Request $request)
     {
         //
-        $tunjangan=Request::all();
-        Tunjangan::create($tunjangan);
+        $rules=[
+            'kode_tunjangan'=>'required|unique:kategori_lemburs',
+            'jabatan_id'=>'required',
+            'golongan_id'=>'required',
+            'status'=>'required',
+            'jumlah_anak'=>'required',
+            'besaran_uang'=>'required',
+        ];
+        $messages=[
+            'kode_tunjangan.required'=>'Kode Tunjangan Tidak Boleh Kosong',
+            'kode_tunjangan.unique'=>'Kode Tunjangan Tidak Boleh Sama',
+            'jabatan_id.required'=>'Jabatan Tidak Boleh Kosong',
+            'golongan_id.required'=>'Golongan Tidak Boleh Kosong',
+            'status.required'=>'Status Harus Diisi',
+            'jumlah_anak.required'=>'Jumlah Anak Tidak Boleh Kosong',
+            'besaran_uang.required'=>'Besaran Uang Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $tunjangan=new Tunjangan;
+        $tunjangan->kode_tunjangan=Request('kode_tunjangan');
+        $tunjangan->jabatan_id=Request('jabatan_id');
+        $tunjangan->golongan_id=Request('golongan_id');
+        $tunjangan->status=Request('status');
+        $tunjangan->jumlah_anak=Request('jumlah_anak');
+        $tunjangan->besaran_uang=Request('besaran_uang');
+        $tunjangan->save();
+
         return redirect('tunjangan');
     }
 
@@ -89,9 +119,35 @@ class TunjanganController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $tunjangan=Request::all();
-        $tunjanganUpdate=Tunjangan::find($id);
-        $tunjanganUpdate->update($tunjangan);
+        $rules=[
+            'kode_tunjangan'=>'required',
+            'jabatan_id'=>'required',
+            'golongan_id'=>'required',
+            'status'=>'required',
+            'jumlah_anak'=>'required',
+            'besaran_uang'=>'required',
+        ];
+        $messages=[
+            'kode_tunjangan.required'=>'Kode Tunjangan Tidak Boleh Kosong',
+            'jabatan_id.required'=>'Jabatan Tidak Boleh Kosong',
+            'golongan_id.required'=>'Golongan Tidak Boleh Kosong',
+            'status.required'=>'Status Harus Diisi',
+            'jumlah_anak.required'=>'Jumlah Anak Tidak Boleh Kosong',
+            'besaran_uang.required'=>'Besaran Uang Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $tunjangan=Tunjangan::find($id);
+        $tunjangan->kode_tunjangan=Request('kode_tunjangan');
+        $tunjangan->jabatan_id=Request('jabatan_id');
+        $tunjangan->golongan_id=Request('golongan_id');
+        $tunjangan->status=Request('status');
+        $tunjangan->jumlah_anak=Request('jumlah_anak');
+        $tunjangan->besaran_uang=Request('besaran_uang');
+        $tunjangan->update();
+
         return redirect('tunjangan');
     }
 

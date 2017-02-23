@@ -19,7 +19,7 @@
 
     <style type="text/css">
         body{
-            background-color: lightblue;
+            background-color: #007acc;
         }
     </style>
   </head>
@@ -45,8 +45,8 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             @if (Auth::guest())
-            <li><a href="{{ url('/login') }}"> Login</a></li>
-            <li><a href="{{ url('/register') }}"> Register</a></li>
+            <li><a href="{{ url('/login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
+            <li><a href="{{ url('/register') }}"><span class="fa fa-plus-square-o"></span> Register</a></li>
             @else
             <li><a href="{{ url('jabatan') }}"><span class="fa fa-briefcase"></span> Jabatan</a></li>
             <li><a href="{{ url('golongan') }}"><span class="fa fa-refresh"></span> Golongan</a></li>

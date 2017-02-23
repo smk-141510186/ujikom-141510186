@@ -9,11 +9,12 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} has-feedback">
                             <label for="email" class="col-md-4 control-label">Alamat E-Mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <span class="fa fa-envelope form-control-feedback"></span>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -23,11 +24,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} has-feedback">
                             <label for="password" class="col-md-4 control-label">Kata Sandi</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
+                                <span class="fa fa-lock form-control-feedback"></span>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -50,7 +52,7 @@
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Login
+                                    <span class="fa fa-sign-in"></span> Login
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">

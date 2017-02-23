@@ -6,6 +6,8 @@ use /*Illuminate\Http\*/Request;
 use App\TunjanganPegawai;
 use App\Tunjangan;
 use App\Pegawai;
+use Validator;
+use Input;
 
 class TunjanganPegawaiController extends Controller
 {
@@ -47,9 +49,24 @@ class TunjanganPegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $tpegawai=Request::all();
-        TunjanganPegawai::create($tpegawai);
+        //        
+        $rules=[
+            'kode_tunjangan_id'=>'required',
+            'pegawai_id'=>'required',
+        ];
+        $messages=[
+            'kode_tunjangan_id.required'=>'Tunjangan Tidak Boleh Kosong',
+            'pegawai_id.required'=>'NIP Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $tpegawai=new TunjanganPegawai;
+        $tpegawai->kode_tunjangan_id=Request('kode_tunjangan_id');
+        $tpegawai->pegawai_id=Request('pegawai_id');
+        $tpegawai->save();
+        
         return redirect('tunjangan-pegawai');
     }
 
@@ -90,9 +107,23 @@ class TunjanganPegawaiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $tpegawai=Request::all();
-        $tpegawaiUpdate=TunjanganPegawai::find($id);
-        $tpegawaiUpdate->update($tpegawai);
+        $rules=[
+            'kode_tunjangan_id'=>'required',
+            'pegawai_id'=>'required',
+        ];
+        $messages=[
+            'kode_tunjangan_id.required'=>'Tunjangan Tidak Boleh Kosong',
+            'pegawai_id.required'=>'NIP Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $tpegawai=TunjanganPegawai::find($id);
+        $tpegawai->kode_tunjangan_id=Request('kode_tunjangan_id');
+        $tpegawai->pegawai_id=Request('pegawai_id');
+        $tpegawai->update();
+
         return redirect('tunjangan-pegawai');
     }
 

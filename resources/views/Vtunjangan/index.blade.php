@@ -36,7 +36,7 @@
 						<td> {{$data->Golongan->nama_golongan}} </td>
 						<td> {{$data->status}} </td>
 						<td> {{$data->jumlah_anak}} </td>
-						<td> Rp.{{$data->besaran_uang}} </td>
+						<td> <?php echo "Rp.".number_format($data->besaran_uang,2,",","."); ?> </td>
 						<td>
 							<a class="btn btn-warning btn-sm" href="{{route('tunjangan.edit', $data->id)}}"><span class="fa fa-edit"></span>Ubah</a>
 						</td>

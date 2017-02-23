@@ -67,12 +67,12 @@ class KategoriLemburController extends Controller
         if ($validasi->fails()) {
             return redirect()->back()->WithErrors($validasi)->WithInput();
         }
-        $user=new KategoriLembur;
-        $user->kode_lembur=Request('kode_lembur');
-        $user->jabatan_id=Request('jabatan_id');
-        $user->golongan_id=Request('golongan_id');
-        $user->besaran_uang=Request('besaran_uang');
-        $user->save();
+        $kategoril=new KategoriLembur;
+        $kategoril->kode_lembur=Request('kode_lembur');
+        $kategoril->jabatan_id=Request('jabatan_id');
+        $kategoril->golongan_id=Request('golongan_id');
+        $kategoril->besaran_uang=Request('besaran_uang');
+        $kategoril->save();
 
         return redirect('lembur-kategori');
     }
@@ -113,9 +113,29 @@ class KategoriLemburController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $kategoril=Request::all();
-        $kategorilUpdate=KategoriLembur::find($id);
-        $kategorilUpdate->update($kategoril);
+        $rules=[
+            'kode_lembur'=>'required',
+            'jabatan_id'=>'required',
+            'golongan_id'=>'required',
+            'besaran_uang'=>'required',
+        ];
+        $messages=[
+            'kode_lembur.required'=>'Kode Lembur Tidak Boleh Kosong',
+            'jabatan_id.required'=>'Jabatan Tidak Boleh Kosong',
+            'golongan_id.required'=>'Golongan Tidak Boleh Kosong',
+            'besaran_uang.required'=>'Besaran Uang Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $kategoril=KategoriLembur::find($id);
+        $kategoril->kode_lembur=Request('kode_lembur');
+        $kategoril->jabatan_id=Request('jabatan_id');
+        $kategoril->golongan_id=Request('golongan_id');
+        $kategoril->besaran_uang=Request('besaran_uang');
+        $kategoril->update();
+
         return redirect('lembur-kategori');
     }
 

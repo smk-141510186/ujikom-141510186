@@ -40,13 +40,12 @@
 						<td> {{$data->Jabatan->nama_jabatan}} </td>
 						<td> {{$data->Golongan->nama_golongan}} </td>
 						<td><img src="gambar/{{$data->photo}}" height="50px" width="50px"></td>
-						<td><a class="btn btn-warning btn-sm" href="{{route('pegawai.edit', $data->id)}}"><span class="fa fa-edit"></span>Ubah</a></td>
 						<td>
 							<form method="POST" action="{{route('pegawai.destroy', $data->id)}}">
 								{{csrf_field()}}
 								<input type="hidden" name="_method" value="DELETE">
 								<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah yakin ingin menghapus data ?');">
-									<span class="fa fa-trash"></span>Hapus
+									<span class="fa fa-trash-o"></span>Hapus
 								</button>
 							</form>
 						</td>

@@ -89,7 +89,7 @@
         </div>
     </div>
 
-    <div class="form-group{{ $errors->has('permission') ? ' has error' : '' }}">
+    <div class="form-group{{ $errors->has('permission') ? ' has-error' : '' }}">
         <label class="col-md-4 control-label">Permission</label>
         <div class="col-md-8 form-group">
             <input class="form-control" id="permission" type="text" name="permission" autofocus>

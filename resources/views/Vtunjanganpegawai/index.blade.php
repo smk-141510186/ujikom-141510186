@@ -27,7 +27,7 @@
 					@foreach($tpegawai as $data)
 					<tr>
 						<td> {{$no++}} </td>
-						<td> Rp.{{$data->Tunjangan->besaran_uang}} </td>
+						<td> <?php echo "Rp.".number_format($data->Tunjangan->besaran_uang,2,",","."); ?> </td>
 						<td> {{$data->Pegawai->nip}} </td>
 						<td>
 							<a class="btn btn-warning btn-sm" href="{{route('tunjangan-pegawai.edit', $data->id)}}"><span class="fa fa-edit"></span>Ubah</a>

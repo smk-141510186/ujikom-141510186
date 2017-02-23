@@ -6,6 +6,8 @@ use /*Illuminate\Http\*/Request;
 use App\LemburPegawai;
 use App\KategoriLembur;
 use App\Pegawai;
+use Validator;
+use Input;
 
 class LemburPegawaiController extends Controller
 {
@@ -48,8 +50,26 @@ class LemburPegawaiController extends Controller
     public function store(Request $request)
     {
         //
-        $lpegawai=Request::all();
-        LemburPegawai::create($lpegawai);
+        $rules=[
+            'kode_lembur_id'=>'required',
+            'pegawai_id'=>'required',
+            'jumlah_jam'=>'required',
+        ];
+        $messages=[
+            'kode_lembur_id.required'=>'Kategori Lembur Tidak Boleh Kosong',
+            'pegawai_id.required'=>'NIP Tidak Boleh Kosong',
+            'jumlah_jam.required'=>'Jumlah Jam Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $lpegawai=new LemburPegawai;
+        $lpegawai->kode_lembur_id=Request('kode_lembur_id');
+        $lpegawai->pegawai_id=Request('pegawai_id');
+        $lpegawai->jumlah_jam=Request('jumlah_jam');
+        $lpegawai->save();
+
         return redirect('lembur-pegawai');
     }
 
@@ -89,9 +109,26 @@ class LemburPegawaiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $lpegawai=Request::all();
-        $lpegawaiUpdate=LemburPegawai::find($id);
-        $lpegawaiUpdate->update($lpegawai);
+        $rules=[
+            'kode_lembur_id'=>'required',
+            'pegawai_id'=>'required',
+            'jumlah_jam'=>'required',
+        ];
+        $messages=[
+            'kode_lembur_id.required'=>'Kategori Lembur Tidak Boleh Kosong',
+            'pegawai_id.required'=>'NIP Tidak Boleh Kosong',
+            'jumlah_jam.required'=>'Jumlah Jam Tidak Boleh Kosong',
+        ];
+        $validasi=Validator::make(Input::all(),$rules,$messages);
+        if ($validasi->fails()) {
+            return redirect()->back()->WithErrors($validasi)->WithInput();
+        }
+        $lpegawai=LemburPegawai::find($id);
+        $lpegawai->kode_lembur_id=Request('kode_lembur_id');
+        $lpegawai->pegawai_id=Request('pegawai_id');
+        $lpegawai->jumlah_jam=Request('jumlah_jam');
+        $lpegawai->update();
+        
         return redirect('lembur-pegawai');
     }
 

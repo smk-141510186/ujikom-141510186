@@ -28,7 +28,7 @@
 					@foreach($lpegawai as $data)
 					<tr>
 						<td> {{$no++}} </td>
-						<td> {{$data->KategoriLembur->besaran_uang}} </td>
+						<td> <?php echo "Rp.".number_format($data->KategoriLembur->besaran_uang,2,",","."); ?> </td>
 						<td> {{$data->Pegawai->nip}} </td>
 						<td> {{$data->jumlah_jam}} </td>
 						<td>

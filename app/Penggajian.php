@@ -12,6 +12,6 @@ class Penggajian extends Model
 
     public function TunjanganPegawai()
     {
-    	return $this->belongsTO('App\TunjanganPegawai','tunjangan_pegawai_id');
+    	return $this->belongsTo('App\TunjanganPegawai','tunjangan_pegawai_id');
     }
 }
